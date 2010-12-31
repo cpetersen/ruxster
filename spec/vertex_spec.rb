@@ -3,8 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "RubyRexster::Vertex" do
   before(:all) do
     RubyRexster::Config.connect_string = "http://localhost:8182/database"
-    @vertex = RubyRexster::Vertex.new
-    @vertex["name"] = "name_value"
+    @vertex = RubyRexster::Vertex.new("name" => "name_value")
   end
 
   it "should post to the proper url upon create" do
@@ -12,20 +11,29 @@ describe "RubyRexster::Vertex" do
     @vertex.create
   end
 
-  it "should add a vertex to the database" do
-    vertex_count = RubyRexster::Vertex.all.count
-    @vertex.create
-    RubyRexster::Vertex.all.count.should == vertex_count+1
-  end
+  describe "after create" do
+    before(:all) do
+      @original_vertex_count = RubyRexster::Vertex.all.count
+      @vertex.create
+    end
+    
+    it "should add a vertex to the database" do
+      RubyRexster::Vertex.all.count.should == @original_vertex_count+1
+    end
 
-  it "should set the _id property after create" do
-    @vertex.create
-    @vertex["_id"].should_not be_nil
-  end
+    it "should set the _id property after create" do
+      @vertex["_id"].should_not be_nil
+    end
 
-  it "should set the _type property after create" do
-    @vertex.create
-    @vertex["_type"].should == "vertex"
+    it "should set the _type property after create" do
+      @vertex["_type"].should == "vertex"
+    end
+    
+    it "should return the vertex when get is called" do
+      vertex = RubyRexster::Vertex.get(@vertex["_id"])
+      vertex["_id"].should == @vertex["_id"]
+      vertex["name"].should == @vertex["name"]
+    end
   end
 
   it "should return all vertices in the database when all is called" do

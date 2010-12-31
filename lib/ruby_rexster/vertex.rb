@@ -3,6 +3,16 @@ require 'json'
 
 module RubyRexster  
   class Vertex < Base
+    def self.get(id)
+      vertex = nil
+      response = Excon.get(Vertex.connect_string + "/vertices/#{id}")
+      if response
+        results = JSON.parse(response.body)["results"]
+        vertex = Vertex.new(results) if results
+      end
+      vertex
+    end
+    
     def create
       response = Excon.post(Vertex.connect_string + "/vertices?" + parameterize)
       if response
