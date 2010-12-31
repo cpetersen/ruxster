@@ -1,0 +1,5 @@
+--colour
+--require spec/compact_progress_bar_formatter.rb
+--format Spec::Runner::Formatter::CompactProgressBarFormatter
+--loadby mtime
+--reverse

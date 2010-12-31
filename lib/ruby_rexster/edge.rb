@@ -1,5 +1,4 @@
 module RubyRexster  
-  class Edge
-    
+  class Edge < Base
   end
 end

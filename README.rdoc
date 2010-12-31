@@ -1,6 +1,16 @@
 = ruby_rexster
 
-Description goes here.
+First install Rexster
+* Checkout from https://github.com/tinkerpop/rexster
+* Install maven2
+* Edit src/main/resources/com/tinkerpop/rexster/rexster.xml and add
+<graph>
+    <graph-name>database</graph-name>
+    <graph-type>tinkergraph</graph-type>
+    <packages-allowed></packages-allowed>
+</graph>
+
+
 
 == Contributing to ruby_rexster
  
