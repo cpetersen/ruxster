@@ -1,4 +1,4 @@
 module RubyRexster  
-  module Vertex
+  class Vertex
   end
 end

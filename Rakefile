@@ -15,24 +15,23 @@ Jeweler::Tasks.new do |gem|
   gem.name = "ruby_rexster"
   gem.homepage = "http://github.com/cpetersen/ruby_rexster"
   gem.license = "MIT"
-  gem.summary = %Q{An Object Graph Mapper (OGM) }
-  gem.description = %Q{An Object Graph Mapper (OGM) for mapping Ruby Objects onto graphs in a instance or Rexster, like CouchRest is for CouchDB }
+  gem.summary = %Q{An Object Graph Mapper (OGM) for Rexster}
+  gem.description = %Q{An Object Graph Mapper (OGM) for mapping Ruby Objects onto graphs in a instance or Rexster, like CouchRest is for CouchDB}
   gem.email = "christopher.petersen@gmail.com"
   gem.authors = ["Christopher Petersen"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
-  gem.add_runtime_dependency 'rest-client', '>= 1.5.1'
+   gem.add_development_dependency 'rspec', '> 1.2.3'
+  gem.add_runtime_dependency 'excon', '0.3.6'
   gem.add_runtime_dependency 'json', '1.2.4'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+require 'rspec/core'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
 require 'rcov/rcovtask'
