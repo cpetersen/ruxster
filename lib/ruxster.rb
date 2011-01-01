@@ -2,10 +2,10 @@ libdir = File.dirname(__FILE__)
 $LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
 
 
-module RubyRexster
-  autoload :Base,   'ruby_rexster/base'
-  autoload :Vertex, 'ruby_rexster/vertex'
-  autoload :Edge,   'ruby_rexster/edge'
+module Ruxster
+  autoload :Base,   'ruxster/base'
+  autoload :Vertex, 'ruxster/vertex'
+  autoload :Edge,   'ruxster/edge'
 
   class Config
     def self.connect_string=(value)

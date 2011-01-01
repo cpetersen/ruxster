@@ -1,7 +1,7 @@
 require 'excon'
 require 'json'
 
-module RubyRexster  
+module Ruxster  
   class Edge < Base
     def self.url_directory
       "edges"

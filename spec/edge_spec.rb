@@ -1,13 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "RubyRexster::Edge" do
+describe "Ruxster::Edge" do
   before(:all) do
-    RubyRexster::Config.connect_string = "http://localhost:8182/database"
-    @vertex1 = RubyRexster::Vertex.new("name" => "Vertex 1")
+    Ruxster::Config.connect_string = "http://localhost:8182/database"
+    @vertex1 = Ruxster::Vertex.new("name" => "Vertex 1")
     @vertex1.create
-    @vertex2 = RubyRexster::Vertex.new("name" => "Vertex 2")
+    @vertex2 = Ruxster::Vertex.new("name" => "Vertex 2")
     @vertex2.create
-    @edge = RubyRexster::Edge.new("_label" => "label", "weight" => 15)
+    @edge = Ruxster::Edge.new("_label" => "label", "weight" => 15)
   end
 
   it "should initialize properly from a hash" do
@@ -52,21 +52,21 @@ describe "RubyRexster::Edge" do
   end
 
   it "should post to the proper url upon create" do
-    edge = RubyRexster::Edge.new("_label" => "label", "weight" => 15, :in_vertex => @vertex1, :out_vertex => @vertex2)
+    edge = Ruxster::Edge.new("_label" => "label", "weight" => 15, :in_vertex => @vertex1, :out_vertex => @vertex2)
     Excon.should_receive(:post).with("http://localhost:8182/database/edges?_label=label&weight=15&_outV=#{@vertex2.id}&_inV=#{@vertex1.id}")
     edge.create
   end
   
   describe "after create" do
     before(:all) do
-      @original_edge_count = RubyRexster::Edge.all.count
+      @original_edge_count = Ruxster::Edge.all.count
       @edge.in_vertex = @vertex1
       @edge.out_vertex = @vertex2
       @edge.create
     end
     
     it "should add a edge to the database" do
-      RubyRexster::Edge.all.count.should == @original_edge_count+1
+      Ruxster::Edge.all.count.should == @original_edge_count+1
     end
   
     it "should set the _id property after create" do
@@ -78,33 +78,33 @@ describe "RubyRexster::Edge" do
     end
     
     it "should return the edge when get is called" do
-      edge = RubyRexster::Edge.get(@edge.id)
+      edge = Ruxster::Edge.get(@edge.id)
       edge.id.should == @edge.id
     end
     
     it "should update the database when update is called" do
       @edge.weight = 25
       @edge.update
-      edge = RubyRexster::Edge.get(@edge.id)
+      edge = Ruxster::Edge.get(@edge.id)
       edge.weight.should == 25
     end
 
     it "should update the database when weight is updated to nil" do
       @edge.weight = nil
       @edge.update
-      edge = RubyRexster::Edge.get(@edge.id)
+      edge = Ruxster::Edge.get(@edge.id)
       edge.weight.should == 0
     end
     
     it "should remove the edge from the database when destroy is called" do
-      edge_count = RubyRexster::Edge.all.count
+      edge_count = Ruxster::Edge.all.count
       @edge.destroy
-      RubyRexster::Edge.all.count.should == edge_count-1
+      Ruxster::Edge.all.count.should == edge_count-1
     end
   end
   
   it "should return all edges in the database when all is called" do
-    edges = RubyRexster::Edge.all
+    edges = Ruxster::Edge.all
     edges.class.should == Array
   end
 end

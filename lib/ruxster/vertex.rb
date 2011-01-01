@@ -1,7 +1,7 @@
 require 'excon'
 require 'json'
 
-module RubyRexster  
+module Ruxster  
   class Vertex < Base
     def self.url_directory
       "vertices"

@@ -1,4 +1,4 @@
-module RubyRexster
+module Ruxster
   class Base
     def initialize(hash={})
       hash.each { |k,v| properties_hash[k] = v }
@@ -24,7 +24,7 @@ module RubyRexster
     end
 
     def self.connect_string
-      RubyRexster::Config.connect_string
+      Ruxster::Config.connect_string
     end
 
     def self.get(id)
