@@ -4,12 +4,12 @@ First install Rexster
 * Checkout from https://github.com/tinkerpop/rexster
 * Install maven2
 * Edit src/main/resources/com/tinkerpop/rexster/rexster.xml and add
-<graph>
+  <graph>
     <graph-name>database</graph-name>
     <graph-type>tinkergraph</graph-type>
     <packages-allowed></packages-allowed>
-</graph>
-
+  </graph>
+* Run mvn install
 
 
 == Contributing to ruby_rexster
