@@ -41,6 +41,12 @@ describe "RubyRexster::Vertex" do
       vertex = RubyRexster::Vertex.get(@vertex["_id"])
       vertex["name"].should == "new_name"
     end
+    
+    it "should remove the vertex from the database when destroy is called" do
+      vertex_count = RubyRexster::Vertex.all.count
+      @vertex.destroy
+      RubyRexster::Vertex.all.count.should == vertex_count-1
+    end
   end
 
   it "should return all vertices in the database when all is called" do

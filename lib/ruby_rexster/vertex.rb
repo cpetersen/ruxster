@@ -27,6 +27,7 @@ module RubyRexster
     end
     
     def destroy
+      response = Excon.delete(Vertex.connect_string + "/vertices/#{self["_id"]}")
     end
     
     def self.all
