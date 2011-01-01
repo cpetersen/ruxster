@@ -11,6 +11,10 @@ describe "RubyRexster::Vertex" do
     @vertex.create
   end
 
+  it "should initialize properly from a hash" do
+    @vertex["name"].should == "name_value"
+  end
+
   describe "after create" do
     before(:all) do
       @original_vertex_count = RubyRexster::Vertex.all.count
@@ -20,7 +24,7 @@ describe "RubyRexster::Vertex" do
     it "should add a vertex to the database" do
       RubyRexster::Vertex.all.count.should == @original_vertex_count+1
     end
-
+    
     it "should set the _id property after create" do
       @vertex["_id"].should_not be_nil
     end
