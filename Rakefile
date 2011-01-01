@@ -12,8 +12,8 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "ruby_rexster"
-  gem.homepage = "http://github.com/cpetersen/ruby_rexster"
+  gem.name = "ruxster"
+  gem.homepage = "http://github.com/cpetersen/ruxster"
   gem.license = "MIT"
   gem.summary = %Q{An Object Graph Mapper (OGM) for Rexster}
   gem.description = %Q{An Object Graph Mapper (OGM) for mapping Ruby Objects onto graphs in a instance or Rexster, like CouchRest is for CouchDB}
@@ -46,7 +46,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "ruby_rexster #{version}"
+  rdoc.title = "ruxster #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
