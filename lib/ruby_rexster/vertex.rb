@@ -23,6 +23,7 @@ module RubyRexster
     end
     
     def update
+      response = Excon.post(Vertex.connect_string + "/vertices/#{self["_id"]}?" + parameterize)
     end
     
     def destroy

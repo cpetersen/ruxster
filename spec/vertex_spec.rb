@@ -34,6 +34,13 @@ describe "RubyRexster::Vertex" do
       vertex["_id"].should == @vertex["_id"]
       vertex["name"].should == @vertex["name"]
     end
+    
+    it "should update the database when update is called" do
+      @vertex["name"] = "new_name"
+      @vertex.update
+      vertex = RubyRexster::Vertex.get(@vertex["_id"])
+      vertex["name"].should == "new_name"
+    end
   end
 
   it "should return all vertices in the database when all is called" do
