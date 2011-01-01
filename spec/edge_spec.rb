@@ -39,6 +39,18 @@ describe "RubyRexster::Edge" do
     @edge.weight.should == 15
   end
 
+  it "it should set weight properly when using a string" do
+    @edge.weight = "15"
+    @edge.properties_hash["weight"].should == 15
+    @edge.weight.should == 15
+  end
+
+  it "it should set weight properly when passed nil" do
+    @edge.weight = nil
+    @edge.properties_hash["weight"].should == 0
+    @edge.weight.should == 0
+  end
+
   it "should post to the proper url upon create" do
     edge = RubyRexster::Edge.new("_label" => "label", "weight" => 15, :in_vertex => @vertex1, :out_vertex => @vertex2)
     Excon.should_receive(:post).with("http://localhost:8182/database/edges?_label=label&weight=15&_outV=#{@vertex2.id}&_inV=#{@vertex1.id}")
@@ -71,10 +83,17 @@ describe "RubyRexster::Edge" do
     end
     
     it "should update the database when update is called" do
-      @edge.label = "new_label"
+      @edge.weight = 25
       @edge.update
       edge = RubyRexster::Edge.get(@edge.id)
-      edge.label.should == "new_label"
+      edge.weight.should == 25
+    end
+
+    it "should update the database when weight is updated to nil" do
+      @edge.weight = nil
+      @edge.update
+      edge = RubyRexster::Edge.get(@edge.id)
+      edge.weight.should == 0
     end
     
     it "should remove the edge from the database when destroy is called" do

@@ -47,7 +47,7 @@ module RubyRexster
       self.properties_hash["weight"]
     end
     def weight=(value)
-      self.properties_hash["weight"] = value
+      self.properties_hash["weight"] = value.to_i
     end
 
     def in_vertex

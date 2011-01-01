@@ -40,7 +40,6 @@ module RubyRexster
     def create
       response = Excon.post(Base.connect_string + "/#{self.class.url_directory}?" + parameterize)
       if response
-        # puts response.body
         results = JSON.parse(response.body)["results"]
         properties_hash["_id"] = results["_id"]
         properties_hash["_type"] = results["_type"]
