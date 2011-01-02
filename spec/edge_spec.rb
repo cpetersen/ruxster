@@ -3,10 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe "Ruxster::Edge" do
   before(:all) do
     Ruxster::Config.connect_string = "http://localhost:8182/database"
-    @vertex1 = Ruxster::Vertex.new("name" => "Vertex 1")
-    @vertex1.create
-    @vertex2 = Ruxster::Vertex.new("name" => "Vertex 2")
-    @vertex2.create
+    @vertex1 = Ruxster::Vertex.create("name" => "Vertex 1")
+    @vertex2 = Ruxster::Vertex.create("name" => "Vertex 2")
     @edge = Ruxster::Edge.new("_label" => "label", "weight" => 15)
   end
 
@@ -55,6 +53,12 @@ describe "Ruxster::Edge" do
     edge = Ruxster::Edge.new("_label" => "label", "weight" => 15, :in_vertex => @vertex1, :out_vertex => @vertex2)
     Excon.should_receive(:post).with("http://localhost:8182/database/edges?_label=label&weight=15&_outV=#{@vertex2.id}&_inV=#{@vertex1.id}")
     edge.create
+  end
+  
+  it "should add a vertex when Class.create is called" do
+    original_vertex_count = Ruxster::Edge.all.count
+    Ruxster::Edge.create("label" => "label_value", :in_vertex => @vertex1, :out_vertex => @vertex2)
+    Ruxster::Edge.all.count.should == original_vertex_count+1
   end
   
   describe "after create" do

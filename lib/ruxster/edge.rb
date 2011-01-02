@@ -72,6 +72,12 @@ module Ruxster
       end
     end
 
+    def self.create(hash={})
+      edge = Edge.new(hash)
+      edge.create
+      edge
+    end
+
     def self.all
       objects = []
       response = Excon.get(Vertex.connect_string + "/edges")

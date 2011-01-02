@@ -36,7 +36,7 @@ module Ruxster
       end
       object
     end
-    
+      
     def create
       response = Excon.post(Base.connect_string + "/#{self.class.url_directory}?" + parameterize)
       if response
