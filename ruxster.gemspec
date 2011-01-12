@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "lib/ruxster/base.rb",
     "lib/ruxster/edge.rb",
     "lib/ruxster/vertex.rb",
+    "ruxster.gemspec",
     "spec/base_spec.rb",
     "spec/edge_spec.rb",
     "spec/ruxster_spec.rb",
