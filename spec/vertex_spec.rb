@@ -79,6 +79,11 @@ describe "Ruxster::Vertex" do
     it "Jack should have 3 Total Edges" do
       @jack.all_edges.count.should == 3
     end
+
+    it "find the right vertex" do
+      results = Ruxster::Vertex.find("name", "Jack")
+      results.first["name"].should == "Jack"
+    end
   end
 
   it "should return all vertices in the database when all is called" do

@@ -53,5 +53,10 @@ module Ruxster
     def destroy
       response = Excon.delete(Base.connect_string + "/#{self.class.url_directory}/#{self.id}")
     end
+
+    def self.find(key, value)
+      response = JSON.parse(Excon.get(Base.connect_string + "/indices/#{url_directory}?key=#{key}&value=#{value}").body)
+      response["results"]
+    end
   end
 end

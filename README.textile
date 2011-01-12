@@ -8,7 +8,7 @@ First install Rexster
 bc. <graph>
   <graph-name>database</graph-name>
   <graph-type>tinkergraph</graph-type>
-  <packages-allowed></packages-allowed>
+  <packages-allowed>gremlin</packages-allowed>
 </graph>
 
 * Run mvn install

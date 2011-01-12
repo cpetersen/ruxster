@@ -61,6 +61,11 @@ describe "Ruxster::Edge" do
     Ruxster::Edge.all.count.should == original_vertex_count+1
   end
   
+  it "find the right edge" do
+    results = Ruxster::Edge.find("weight", 15)
+    results.first["weight"].should == "15"
+  end
+  
   describe "after create" do
     before(:all) do
       @original_edge_count = Ruxster::Edge.all.count
