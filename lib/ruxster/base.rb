@@ -67,7 +67,11 @@ module Ruxster
 
     def self.find(key, value)
       response = JSON.parse(Excon.get(Base.connect_string + "/indices/#{url_directory}?key=#{key}&value=#{value}").body)
-      response["results"]
+      result = []
+      response["results"].each do |item|
+        result << self.new(item)
+      end
+      result
     end
   end
 end

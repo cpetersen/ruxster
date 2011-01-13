@@ -63,7 +63,7 @@ describe "Ruxster::Edge" do
   
   it "find the right edge" do
     results = Ruxster::Edge.find("weight", 15)
-    results.first["weight"].should == "15"
+    results.first.weight.should == 15
   end
   
   describe "after create" do
