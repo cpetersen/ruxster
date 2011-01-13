@@ -53,6 +53,17 @@ module Ruxster
     def destroy
       response = Excon.delete(Base.connect_string + "/#{self.class.url_directory}/#{self.id}")
     end
+    
+    def self.create_index(automatic=true)
+      url = Base.connect_string + "/indices/index?class=#{self.index_type}"
+      url += "&type=automatic" if automatic
+      Excon.post(url)
+    end
+    
+    def self.indices
+      response = JSON.parse(Excon.get(Base.connect_string + "/indices").body)
+      response["results"]
+    end
 
     def self.find(key, value)
       response = JSON.parse(Excon.get(Base.connect_string + "/indices/#{url_directory}?key=#{key}&value=#{value}").body)

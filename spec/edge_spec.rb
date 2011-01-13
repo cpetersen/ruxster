@@ -116,4 +116,15 @@ describe "Ruxster::Edge" do
     edges = Ruxster::Edge.all
     edges.class.should == Array
   end
+
+  it "should post to the proper url when creating the edge index" do
+    Excon.should_receive(:post).with("http://localhost:8182/database/indices/index?class=edge&type=automatic")
+    Ruxster::Edge.create_index    
+  end
+  
+  it "should return an array of hashes when Edge.indices is called" do
+    Ruxster::Edge.create_index    
+    indices = Ruxster::Edge.indices
+    indices.should include({"name" => "edges","class" => "com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jEdge","type" => "automatic"})
+  end
 end

@@ -6,6 +6,9 @@ module Ruxster
     def self.url_directory
       "edges"
     end
+    def self.index_type
+      "edge"
+    end
 
     def initialize(hash={})
       hash.each do |key, value|

@@ -79,15 +79,26 @@ describe "Ruxster::Vertex" do
     it "Jack should have 3 Total Edges" do
       @jack.all_edges.count.should == 3
     end
-
-    it "find the right vertex" do
-      results = Ruxster::Vertex.find("name", "Jack")
-      results.first["name"].should == "Jack"
-    end
   end
 
   it "should return all vertices in the database when all is called" do
     vertices = Ruxster::Vertex.all
     vertices.class.should == Array
+  end
+
+  it "should post to the proper url when creating the vertex index" do
+    Excon.should_receive(:post).with("http://localhost:8182/database/indices/index?class=vertex&type=automatic")
+    Ruxster::Vertex.create_index    
+  end
+  
+  it "should return an array of hashes when Vertex.indices is called" do
+    Ruxster::Vertex.create_index    
+    indices = Ruxster::Vertex.indices
+    indices.should include({"name" => "vertices","class" => "com.tinkerpop.blueprints.pgm.impls.neo4j.Neo4jVertex","type" => "automatic"})
+  end
+
+  it "find the right vertex" do
+    results = Ruxster::Vertex.find("name", "Jack")
+    results.first["name"].should == "Jack"
   end
 end

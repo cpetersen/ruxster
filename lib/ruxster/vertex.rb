@@ -6,6 +6,9 @@ module Ruxster
     def self.url_directory
       "vertices"
     end
+    def self.index_type
+      "vertex"
+    end
 
     def [](key)
       properties_hash[key]
