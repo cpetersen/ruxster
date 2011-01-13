@@ -118,7 +118,7 @@ describe "Ruxster::Edge" do
   end
 
   it "should post to the proper url when creating the edge index" do
-    Excon.should_receive(:post).with("http://localhost:8182/database/indices/index?class=edge&type=automatic")
+    Excon.should_receive(:post).with("http://localhost:8182/database/indices/edges?class=edge&type=automatic")
     Ruxster::Edge.create_index    
   end
   

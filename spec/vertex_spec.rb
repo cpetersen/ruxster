@@ -87,7 +87,7 @@ describe "Ruxster::Vertex" do
   end
 
   it "should post to the proper url when creating the vertex index" do
-    Excon.should_receive(:post).with("http://localhost:8182/database/indices/index?class=vertex&type=automatic")
+    Excon.should_receive(:post).with("http://localhost:8182/database/indices/vertices?class=vertex&type=automatic")
     Ruxster::Vertex.create_index    
   end
   
