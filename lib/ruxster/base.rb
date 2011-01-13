@@ -55,7 +55,7 @@ module Ruxster
     end
     
     def self.create_index(automatic=true)
-      url = Base.connect_string + "/indices/index?class=#{self.index_type}"
+      url = Base.connect_string + "/indices/#{self.url_directory}?class=#{self.index_type}"
       url += "&type=automatic" if automatic
       Excon.post(url)
     end
